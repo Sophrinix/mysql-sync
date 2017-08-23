@@ -28,6 +28,7 @@
     "dependencies": {
         "mysql": "*",
         "node-sync": "*",
-        "underscore": "*"
+        "underscore": "*",
+        "uuid": "*"
     }
 }
