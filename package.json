@@ -29,6 +29,7 @@
         "mysql": "*",
         "node-sync": "*",
         "underscore": "*",
-        "uuid": "*"
+        "uuid": "*",
+        "qoop": "*"
     }
 }
