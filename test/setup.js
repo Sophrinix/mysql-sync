@@ -1,9 +1,9 @@
-var sync = require('node-sync').sync3;
-var co = sync.proc;
+var sync = require('node-sync').sync4;
+var co = sync.co;
+var proc = sync.proc;
 var $let = sync.letImplicit;
 var $get = sync.implicit;
 var lift = sync.lift;
-var parallel = sync.parallel;
 
 var $U = require('underscore');
 
@@ -27,7 +27,7 @@ var setup = function(main) {
             'connection': cfg
         });
 
-        yield dbCfg.ready();
+        yield* dbCfg.ready();
         var db = dbCfg.getDB({
             'connectionLimit': 10
         });
@@ -37,16 +37,19 @@ var setup = function(main) {
 
     var run = co(function*() {
         try {
-            var db = yield prepare();
-            return (yield db.context(co(function*() {
-                return yield main(dbCfg, $M);
+            var db = yield* prepare();
+            return (yield* db.context(co(function*() {
+                return yield* main(dbCfg, $M);
             })));
-        } finally {
+        } catch(err) {
+            console.log(err);
+            throw err;
+        }finally {
             db.end();
         }
     });
 
-    run()({}, {}, function(s, err, res) {
+    proc(run)()({}, {}, function(s, err, res) {
         if (err) {
             console.log('Error:', err);
             if (err.stack) {

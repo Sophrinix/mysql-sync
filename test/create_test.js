@@ -1,5 +1,5 @@
-var sync = require('node-sync').sync3;
-var co = sync.proc;
+var sync = require('node-sync').sync4;
+var co = sync.co;
 var $let = sync.letImplicit;
 var $get = sync.implicit;
 var lift = sync.lift;
@@ -10,7 +10,7 @@ var $U = require('underscore');
 var setup = require('./setup');
 
 setup(co(function*(db, $M) {
-    var newUser = yield $M('users').create({
+    var newUser = yield* $M('users').create({
         'first_name': 'Danny',
         'last_name': 'Tag',
         'gender': 'F',
