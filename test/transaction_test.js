@@ -1,12 +1,4 @@
-var sync = require('node-sync').sync4;
-var co = sync.co;
-var $let = sync.letImplicit;
-var $get = sync.implicit;
-var lift = sync.lift;
-var sleep = sync.sleep;
-var Thread = sync.Thread;
-
-var $U = require('underscore');
+eval(require('../lib/require_bundle')('sync', 'common'));
 
 var setup = require('./setup');
 

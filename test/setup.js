@@ -1,11 +1,4 @@
-var sync = require('node-sync').sync4;
-var co = sync.co;
-var proc = sync.proc;
-var $let = sync.letImplicit;
-var $get = sync.implicit;
-var lift = sync.lift;
-
-var $U = require('underscore');
+eval(require('../lib/require_bundle')('sync', 'common'));
 
 var DBCfg = require('../lib/db_config');
 
@@ -49,11 +42,14 @@ var setup = function(main) {
         }
     });
 
-    proc(run)()({}, {}, function(s, err, res) {
+    proc(run)()({}, function(err, res) {
         if (err) {
             console.log('Error:', err);
             if (err.stack) {
                 console.log(err.stack);
+            }
+            if (err.__generatorStack__) {
+                console.log(err.__generatorStack__);
             }
         } else {
             console.log('Ok:', res);

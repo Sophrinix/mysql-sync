@@ -27,7 +27,7 @@
     },
     "dependencies": {
         "mysql": "*",
-        "node-sync": "*",
+        "node-sync": "^0.3.7",
         "qoop": "*",
         "underscore": "*",
         "uuid": "*"
