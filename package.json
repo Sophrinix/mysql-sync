@@ -3,7 +3,7 @@
     "description": "Use mysql libs the \"normal way\".",
     "main": "./lib/main",
     "author": "Chiyan Chen",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "repository": {
         "type": "git",
         "url": "https://github.com/redblaze/mysql-sync.git"
