@@ -1,4 +1,4 @@
-drop database `chat`;
+-- drop database `chat`;
 
 create database if not exists `chat`
   DEFAULT CHARACTER SET utf8
@@ -24,7 +24,7 @@ create table if not exists `users` (
 ) engine=InnoDB;
 
 create table if not exists `user_sessions` (
-	  id bigint primary key auto_increment not null,
+    id bigint primary key auto_increment not null,
     date_created datetime not null,
     last_updated datetime not null,
     lock_version bigint not null default 0,
@@ -36,7 +36,7 @@ create table if not exists `user_sessions` (
 ) engine=InnoDB;
 
 create table if not exists `chat_rooms` (
-	  id bigint primary key auto_increment not null,
+    id bigint primary key auto_increment not null,
     date_created datetime not null,
     last_updated datetime not null,
     lock_version bigint not null default 0,
@@ -49,21 +49,20 @@ create table if not exists `chat_rooms` (
 ) engine=InnoDB;
 
 create table if not exists `members` (
-	  id bigint primary key auto_increment not null,
+    id bigint primary key auto_increment not null,
     date_created datetime not null,
     last_updated datetime not null,
     lock_version bigint not null default 0,
     is_deleted boolean not null default 0,
 
-	  chat_room_id bigint not null,
-	  user_id bigint not null,
-	  inviter_id bigint,
-	  status varchar(10) not null
+    chat_room_id bigint not null,
+    user_id bigint not null,
+    inviter_id bigint,
+    status varchar(10) not null
 ) engine=InnoDB;
 
-
 create table if not exists `messages` (
-	  id bigint primary key auto_increment not null,
+    id bigint primary key auto_increment not null,
     date_created datetime not null,
     last_updated datetime not null,
     lock_version bigint not null default 0,
