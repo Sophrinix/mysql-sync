@@ -21,6 +21,7 @@ var DBConfig = require('mysql-sync');
 * DBConfig
     * ready
     * getDB
+    * getModel
     * executeQuery
     * transaction
     * format
@@ -48,19 +49,33 @@ ready is a generator function who makes all necessary preparations for a db conf
 
 #### getDB: () -> DB
 
-getDB is a normal function that produces a DB object from a DB Configuration.  You can get multiple DB objects from a DB configuration.  Under the hood, each DB object wraps up a connection pool.
+getDB is a normal function that produces a DB object from a DB Configuration.  You can get multiple DB objects from a DB configuration.  Under the hood, each DB object wraps up a connection pool.  This is the only way a DB object can be factoried.
 
-#### executeQuery (query_string) ~> query_results
+#### getModel: (table_name_string) -> Table
+
+getModel is a normal function which, given a table name, return a Table object.  This is the only way a table object can be factoried.
+
+#### executeQuery (query\_string) ~> query\_results
 
 executeQuery is a generator function that runs a query string and get you the results.
 
-#### transaction (generator_function) ~> results
+#### transaction (generator\_function) ~> results
 
 transaction takes a generator function as input, run it in the context of mysql database transaction, and return the result generated from the transaction.
 
-#### format (query_string_template, [list_of_values]) -> query_string
+#### format (query\_string\_template, [list\_of\_values]) -> query\_string
 
 format is a helper function that splices values into a query string template, in a proper and safe way, to form a executable query string.
+
+### DB
+
+#### context: (generator\_function) ~> generator\_function
+
+context is the only API that is exposed on DB objects.  It wraps up an operation in the context of the subject database, such that any database operation being conducted in the operation will be connected to the subject database.
+
+### Table
+
+#### create: (fields: Object) ~> row_id: Number
 
 #### Example
 
